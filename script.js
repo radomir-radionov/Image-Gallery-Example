@@ -1,6 +1,8 @@
 const imageWrapper = document.querySelector('.images');
 const loadMoreBtn = document.querySelector('.load-more');
 const searchInput = document.querySelector('.search input');
+const lightbox = document.querySelector('.lightbox');
+const closeImgBtn = lightbox.querySelector('.close-icon');
 
 // API key, paginations, searchTerm variables
 const apiKey = '9CLXIMXhpRXjM9CC6MhNX3fU3vyLvSyX0D48DlWq08c6jLyDfVrWb8jo';
@@ -24,13 +26,28 @@ const downloadImg = (imgUrl) => {
     .catch(() => alert('Failed to download image!'));
 };
 
+const showLightbox = (name, img) => {
+  // Showing lightbox and setting img source, name and button attribute
+  lightbox.querySelector('img').src = img;
+  lightbox.querySelector('span').innerText = name;
+  //   downloadImgBtn.setAttribute('data-img', img);
+  lightbox.classList.add('show');
+  document.body.style.overflow = 'hidden';
+};
+
+const hideLightbox = () => {
+  // Hiding lightbox on close icon click
+  lightbox.classList.remove('show');
+  document.body.style.overflow = 'auto';
+};
+
 const generateHTML = (images) => {
   // Making li of all fetched images and adding them to the existing image wrapper
   imageWrapper.innerHTML += images
     .map(
       (img) =>
         `<li class="card">
-            <img src="${img.src.large2x}" alt="img">
+            <img onclick="showLightbox('${img.photographer}', '${img.src.large2x}')" src="${img.src.large2x}" alt="img">
             <div class="details">
                 <div class="photographer">
                     <i class="uil uil-camera"></i>
@@ -92,3 +109,4 @@ const loadSearchImages = (e) => {
 
 loadMoreBtn.addEventListener('click', loadMoreImages);
 searchInput.addEventListener('keyup', loadSearchImages);
+closeImgBtn.addEventListener('click', hideLightbox);

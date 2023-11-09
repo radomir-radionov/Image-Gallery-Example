@@ -203,8 +203,12 @@ i {
   height: 100%;
   background: rgba(0, 0, 0, 0.65);
   display: none;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center;
+  align-items: center; */
+
+  &.show {
+    display: block;
+  }
 
   & .wrapper {
     position: absolute;
