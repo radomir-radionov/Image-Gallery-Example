@@ -3,6 +3,7 @@ const loadMoreBtn = document.querySelector('.load-more');
 const searchInput = document.querySelector('.search input');
 const lightbox = document.querySelector('.lightbox');
 const closeImgBtn = lightbox.querySelector('.close-icon');
+const downloadImgBtn = lightbox.querySelector('.uil-import');
 
 // API key, paginations, searchTerm variables
 const apiKey = '9CLXIMXhpRXjM9CC6MhNX3fU3vyLvSyX0D48DlWq08c6jLyDfVrWb8jo';
@@ -30,7 +31,7 @@ const showLightbox = (name, img) => {
   // Showing lightbox and setting img source, name and button attribute
   lightbox.querySelector('img').src = img;
   lightbox.querySelector('span').innerText = name;
-  //   downloadImgBtn.setAttribute('data-img', img);
+  downloadImgBtn.setAttribute('data-img', img);
   lightbox.classList.add('show');
   document.body.style.overflow = 'hidden';
 };
@@ -110,3 +111,6 @@ const loadSearchImages = (e) => {
 loadMoreBtn.addEventListener('click', loadMoreImages);
 searchInput.addEventListener('keyup', loadSearchImages);
 closeImgBtn.addEventListener('click', hideLightbox);
+downloadImgBtn.addEventListener('click', (e) =>
+  downloadImg(e.target.dataset.img)
+);
