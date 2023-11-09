@@ -8,19 +8,35 @@ const perPage = 15;
 let currentPage = 1;
 let searchTerm = null;
 
+const downloadImg = (imgUrl) => {
+  //   console.log(imgUrl);
+
+  // Converting received img to blob, creating its download link, & downloading it
+  fetch(imgUrl)
+    .then((res) => res.blob())
+    .then((blob) => {
+      //   console.log(blob);
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = new Date().getTime();
+      a.click();
+    })
+    .catch(() => alert('Failed to download image!'));
+};
+
 const generateHTML = (images) => {
   // Making li of all fetched images and adding them to the existing image wrapper
   imageWrapper.innerHTML += images
     .map(
       (img) =>
         `<li class="card">
-            <img  src="${img.src.large2x}" alt="img">
+            <img src="${img.src.large2x}" alt="img">
             <div class="details">
                 <div class="photographer">
                     <i class="uil uil-camera"></i>
                     <span>${img.photographer}</span>
                 </div>
-                <button>
+                <button onclick="downloadImg('${img.src.large2x}');">
                     <i class="uil uil-import"></i>
                 </button>
             </div>
