@@ -1,4 +1,5 @@
 const imageWrapper = document.querySelector('.images');
+const loadMoreBtn = document.querySelector('.load-more');
 
 const apiKey = '9CLXIMXhpRXjM9CC6MhNX3fU3vyLvSyX0D48DlWq08c6jLyDfVrWb8jo';
 const perPage = 15;
@@ -26,6 +27,9 @@ const generateHTML = (images) => {
 };
 
 const getImages = (apiURL) => {
+  loadMoreBtn.innerText = 'Loading...';
+  loadMoreBtn.classList.add('disabled');
+
   // Fetching images by API call with authorization header
   fetch(apiURL, {
     headers: { Authorization: apiKey },
@@ -33,6 +37,8 @@ const getImages = (apiURL) => {
     .then((res) => res.json())
     .then((data) => {
       generateHTML(data.photos);
+      loadMoreBtn.innerText = 'Load More';
+      loadMoreBtn.classList.remove('disabled');
     })
     .catch(() => alert('Failed to load images!'));
 };
@@ -40,3 +46,11 @@ const getImages = (apiURL) => {
 getImages(
   `https://api.pexels.com/v1/curated?page=${currentPage}&per_page=${perPage}`
 );
+
+const loadMoreImages = () => {
+  currentPage++; // Increment currentPage by 1
+  let apiUrl = `https://api.pexels.com/v1/curated?page=${currentPage}&per_page=${perPage}`;
+  getImages(apiUrl);
+};
+
+loadMoreBtn.addEventListener('click', loadMoreImages);
