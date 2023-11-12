@@ -24,6 +24,30 @@ const downloadImg = (imgUrl) => {
     .catch(() => alert('Failed to download image!'));
 };
 
+// Here's a step-by-step explanation:
+
+// Fetch Image:
+
+// The function starts by using the fetch API to retrieve the image from the specified imgUrl.
+// Convert Response to Blob:
+
+// The response is then converted to a Blob using res.blob().  a Blob, representing the binary data of the image.
+// Create Download Link:
+
+// A new <a> (anchor) element is created dynamically in memory.
+// Set Href Attribute: By setting a.href to this URL, you essentially tell the browser where to find the data to download.
+
+// The href attribute of the <a> element is set to a URL representing the Blob data. This URL is created using URL.createObjectURL(blob).
+// Set Download Attribute:
+
+// The download attribute of the <a> element is set to a timestamp (using new Date().getTime()) to ensure a unique filename for the downloaded image.
+// Simulate Click:
+
+// The click() method is called on the <a> element, simulating a click. This triggers the browser's download functionality.
+// Error Handling:
+
+// If there is an error during the fetch or blob creation process, an alert is shown indicating that the image download has failed.
+
 const generateHTML = (images) => {
   // Making li of all fetched images and adding them to the existing image wrapper
   imageWrapper.innerHTML += images
