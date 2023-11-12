@@ -90,50 +90,40 @@
   align-items: center;
 
   & .images {
-    gap: 15px;
     max-width: 95%;
     margin-top: 40px;
-    columns: 5 340px;
+    columns: 5 280px;
     list-style: none;
 
     & .card {
-      display: flex;
-      cursor: pointer;
-      overflow: hidden;
       position: relative;
+      display: flex;
       margin-bottom: 14px;
       border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
     }
 
     & img {
       width: 100%;
-      z-index: 2;
       position: relative;
     }
 
     & .details {
       position: absolute;
       z-index: 4;
-      width: 100%;
-      bottom: -100px;
       display: flex;
       align-items: center;
-      padding: 15px 20px;
       justify-content: space-between;
+      width: 100%;
+      bottom: -100px;
+      padding: 15px 20px;
       transition: bottom 0.1s ease;
       background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
     }
 
     & li:hover .details {
       bottom: 0;
-    }
-
-    & .load-more {
-      color: #fff;
-      background: #8a6cff;
-      margin: 50px 0;
-      font-size: 1.2rem;
-      padding: 12px 27px;
     }
   }
 
@@ -180,11 +170,11 @@ i {
 }
 
 .details button {
-  background: #fff;
-  font-size: 1.1rem;
   padding: 3px 8px;
+  font-size: 1.1rem;
+  background: #fff;
 }
 
 .details .download-btn:hover {
-  background: #f2f2f2;
+  background: #e7e6e6;
 }
